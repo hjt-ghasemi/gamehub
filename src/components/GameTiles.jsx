@@ -1,16 +1,25 @@
 import Container from "@mui/material/Container";
 
 import useGames from "../hooks/useGames";
-import { Grid } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
+import GameCard from "./GameCard";
 
 const GameTiles = () => {
   const { games, isLoading, error, isFetching } = useGames();
 
-  if (error) return <h1>error.message</h1>;
+  if (error) return <h1>{error.message}</h1>;
 
   return (
-    <Grid container spacing={3}>
-      {isFetching && <h1>Loading</h1>}
+    <Grid container spacing={4}>
+      {games.map((gamesCol, idx) => (
+        <Grid item xs key={idx}>
+          <Stack spacing={4}>
+            {gamesCol.map((game) => (
+              <GameCard key={game.id} game={game} />
+            ))}
+          </Stack>
+        </Grid>
+      ))}
     </Grid>
   );
 };
