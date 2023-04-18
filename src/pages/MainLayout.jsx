@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Navbar from "../components/Navbar";
-import GameTiles from "../components/GameTiles";
+import GamesSection from "../components/GamesSection";
 
 const MainLayout = () => {
   return (
@@ -14,7 +14,7 @@ const MainLayout = () => {
           <Box sx={{ backgroundColor: "red" }}>aside</Box>
         </Grid>
         <Grid item xs={12} md>
-          <GameTiles />
+          <GamesSection />
         </Grid>
       </Grid>
     </Box>

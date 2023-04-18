@@ -9,11 +9,9 @@ const GameTiles = () => {
   if (error) return <h1>error.message</h1>;
 
   return (
-    <Container maxWidth="xl">
-      <Grid container spacing={3}>
-        {isFetching && <h1>Loading</h1>}
-      </Grid>
-    </Container>
+    <Grid container spacing={3}>
+      {isFetching && <h1>Loading</h1>}
+    </Grid>
   );
 };
 
