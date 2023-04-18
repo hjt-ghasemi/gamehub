@@ -20,8 +20,6 @@ const PlatformsDropdown = () => {
 
   if (error) return null;
 
-  console.log(data);
-
   return (
     <Box>
       <LoadingButton
