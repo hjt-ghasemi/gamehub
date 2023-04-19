@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import PlatformIconsList from "./PlatformIconsList";
 import Title from "./Title";
+import getCroppedImageUrl from "../services/imageUrlService";
 
 const GameCard = ({ game }) => {
   return (
@@ -13,10 +14,13 @@ const GameCard = ({ game }) => {
         component="img"
         alt={game.name}
         height="200"
-        image={game.background_image}
+        image={getCroppedImageUrl(game.background_image)}
       />
       <CardContent>
-        <PlatformIconsList platforms={game.parent_platforms} />
+        <PlatformIconsList
+          score={game.metacritic}
+          platforms={game.parent_platforms}
+        />
         <Title>{game.name}</Title>
       </CardContent>
     </Card>

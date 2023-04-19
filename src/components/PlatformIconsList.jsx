@@ -13,6 +13,7 @@ import { BsGlobe } from "react-icons/bs";
 import Icon from "@mui/material/Icon";
 import { grey } from "@mui/material/colors";
 import { useTheme } from "@emotion/react";
+import CriticScore from "./CriticScore";
 
 const iconMap = {
   pc: FaWindows,
@@ -26,9 +27,7 @@ const iconMap = {
   android: FaAndroid,
 };
 
-const PlatformIconsList = ({ platforms }) => {
-  const theme = useTheme();
-
+const PlatformIconsList = ({ platforms, score }) => {
   return (
     <Stack direction="row" mb={2}>
       {platforms.map(({ platform }) => {
@@ -47,6 +46,7 @@ const PlatformIconsList = ({ platforms }) => {
           )
         );
       })}
+      <CriticScore score={score} />
     </Stack>
   );
 };
