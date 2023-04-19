@@ -7,7 +7,7 @@ export default function useGames() {
   const { data, error, isLoading, isFetching } = useQuery("gamesData", () =>
     httpService.get("/games")
   );
-  const tailedGames = useTileCreator(data?.data?.results);
-
-  return { games: tailedGames, error, isLoading, isFetching };
+  const { tiledGames, cols } = useTileCreator(data?.data?.results);
+  console.log("tile in games hook: ", tiledGames);
+  return { games: tiledGames, error, isLoading, isFetching, cols };
 }

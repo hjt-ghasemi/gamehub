@@ -12,7 +12,6 @@ import { SiNintendo } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
 import Icon from "@mui/material/Icon";
 import { grey } from "@mui/material/colors";
-import { useTheme } from "@emotion/react";
 import CriticScore from "./CriticScore";
 
 const iconMap = {
@@ -35,6 +34,7 @@ const PlatformIconsList = ({ platforms, score }) => {
         return (
           MyIcon && (
             <Icon
+              key={platform.name}
               sx={{
                 color: (theme) =>
                   theme.palette.mode === "dark" ? grey[500] : grey[600],

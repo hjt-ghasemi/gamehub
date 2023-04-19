@@ -6,9 +6,6 @@ export default function useTileCreator(games) {
   const gtMd = useMediaQuery(theme.breakpoints.up("md"));
   const gtSm = useMediaQuery(theme.breakpoints.up("sm"));
 
-  if (!games?.length) return [];
-
-  const tiledGames = [];
   let cols = 1;
 
   if (gtMd) {
@@ -16,6 +13,10 @@ export default function useTileCreator(games) {
   } else if (gtSm) {
     cols = 2;
   }
+
+  const tiledGames = [];
+
+  if (!games?.length) return { tiledGames, cols };
 
   for (let i = 0; i < cols; i++) tiledGames[i] = [];
 
@@ -25,5 +26,5 @@ export default function useTileCreator(games) {
     tiledGames[pointer++]?.push(games[i]);
   }
 
-  return tiledGames;
+  return { tiledGames, cols };
 }

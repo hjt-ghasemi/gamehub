@@ -9,7 +9,7 @@ import getCroppedImageUrl from "../services/imageUrlService";
 
 const GameCard = ({ game }) => {
   return (
-    <Card sx={{ position: "relative" }}>
+    <Card>
       <CardMedia
         component="img"
         alt={game.name}
