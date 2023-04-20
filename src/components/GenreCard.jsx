@@ -20,11 +20,11 @@ const GenreCard = ({ genre }) => {
           backgroundColor: "#77777777",
         },
       }}
-      className={genre.slug === query.genre ? "active" : ""}
+      className={genre.slug === query.genres ? "active" : ""}
       onClick={() =>
         setQuery((prevQuery) => ({
           ...prevQuery,
-          genre: genre.slug,
+          genres: genre.slug,
         }))
       }
     >

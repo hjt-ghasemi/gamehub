@@ -6,7 +6,9 @@ import ColorModeContext from "./contexts/ColorModeContext";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClient, QueryClientProvider } from "react-query";
 import QueryContext from "./contexts/QueryContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import config from "./config.json";
+import paramsComposer from "./services/paramsComposer";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,7 +20,11 @@ const queryClient = new QueryClient({
 
 const App = () => {
   const { colorMode, theme } = useTheme();
-  const [query, setQuery] = useState({ genre: "" });
+  const [query, setQuery] = useState({ genres: "", parent_platforms: "" });
+
+  useEffect(() => {
+    queryClient.invalidateQueries([config.gamesKey, paramsComposer(query)]);
+  }, [query]);
 
   return (
     <QueryClientProvider client={queryClient}>

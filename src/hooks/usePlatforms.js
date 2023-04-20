@@ -6,5 +6,7 @@ export default function usePlatforms() {
     httpService.get("/platforms/lists/parents")
   );
 
-  return { data, error, isLoading };
+  const platforms = data?.data.results || [];
+
+  return { platforms, error, isLoading };
 }
