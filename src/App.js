@@ -20,7 +20,11 @@ const queryClient = new QueryClient({
 
 const App = () => {
   const { colorMode, theme } = useTheme();
-  const [query, setQuery] = useState({ genres: "", parent_platforms: "" });
+  const [query, setQuery] = useState({
+    genres: "",
+    parent_platforms: "",
+    ordering: "",
+  });
 
   useEffect(() => {
     queryClient.invalidateQueries([config.gamesKey, paramsComposer(query)]);

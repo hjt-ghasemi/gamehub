@@ -2,18 +2,28 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { useContext, useState } from "react";
-import usePlatforms from "../hooks/usePlatforms";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import QueryContext from "../contexts/QueryContext";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-const PlatformsDropdown = () => {
-  const { platforms, error, isLoading } = usePlatforms();
+const OrderDropdown = () => {
+  const orders = [
+    { label: "Relenvance", slug: "" },
+    { label: "Name", slug: "name" },
+    { label: "Release date", slug: "released" },
+    { label: "Critic", slug: "-metacritic" },
+  ];
+
+  const selectedOrder = (slug) => {
+    const index = orders.findIndex((order) => order.slug === slug);
+    return orders[index].label;
+  };
+
   const [query, setQuery] = useContext(QueryContext);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -21,48 +31,40 @@ const PlatformsDropdown = () => {
     setAnchorEl(null);
   };
 
-  const handleSelect = (id) => {
+  const handleSelect = (sortBy) => {
     setAnchorEl(null);
     setQuery((prevQuery) => ({
       ...prevQuery,
-      parent_platforms: id,
+      ordering: sortBy,
     }));
   };
 
-  if (error) return null;
-
-  const selectedPlatform = (id) => {
-    if (!platforms) return null;
-    const index = platforms.findIndex((platform) => id === platform.id);
-    return platforms[index]?.name;
-  };
+  console.log(query);
 
   return (
     <Box>
-      <LoadingButton
-        id="platform-button"
+      <Button
+        id="sort-button"
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
-        loading={isLoading}
-        loadingPosition="end"
       >
-        <span>{selectedPlatform(query.parent_platforms) || "platforms"}</span>
-      </LoadingButton>
+        Order by: {selectedOrder(query.ordering)}
+      </Button>
       <Menu
-        id="platform-menu"
+        id="sort-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          "aria-labelledby": "basic-button",
+          "aria-labelledby": "sort-button",
         }}
       >
-        {platforms.map((platform) => (
-          <MenuItem key={platform.id} onClick={() => handleSelect(platform.id)}>
-            {platform.name}
+        {orders.map((order) => (
+          <MenuItem key={order.slug} onClick={() => handleSelect(order.slug)}>
+            {order.label}
           </MenuItem>
         ))}
       </Menu>
@@ -70,4 +72,4 @@ const PlatformsDropdown = () => {
   );
 };
 
-export default PlatformsDropdown;
+export default OrderDropdown;

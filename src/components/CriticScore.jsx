@@ -2,6 +2,8 @@ import Chip from "@mui/material/Chip";
 import { lightGreen, amber, red } from "@mui/material/colors";
 
 const CriticScore = ({ score }) => {
+  if (!score) return null;
+
   const color =
     score > 80 ? lightGreen[500] : score > 60 ? amber[500] : red[500];
   return (
