@@ -8,6 +8,5 @@ export default function useGames() {
     httpService.get("/games")
   );
   const { tiledGames, cols } = useTileCreator(data?.data?.results);
-  console.log("tile in games hook: ", tiledGames);
   return { games: tiledGames, error, isLoading, isFetching, cols };
 }

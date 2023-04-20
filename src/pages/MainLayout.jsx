@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Navbar from "../components/Navbar";
 import GamesSection from "../components/GamesSection";
+import GenresSection from "../components/GenresSection";
 
 const MainLayout = () => {
   return (
@@ -11,7 +12,7 @@ const MainLayout = () => {
           <Navbar />
         </Grid>
         <Grid item sx={{ display: { xs: "none", md: "block" } }} md="auto">
-          <Box sx={{ backgroundColor: "red" }}>aside</Box>
+          <GenresSection />
         </Grid>
         <Grid item xs={12} md>
           <GamesSection />

@@ -5,6 +5,8 @@ import MainLayout from "./pages/MainLayout";
 import ColorModeContext from "./contexts/ColorModeContext";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClient, QueryClientProvider } from "react-query";
+import QueryContext from "./contexts/QueryContext";
+import { useState } from "react";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,15 +18,19 @@ const queryClient = new QueryClient({
 
 const App = () => {
   const { colorMode, theme } = useTheme();
+  const [query, setQuery] = useState({ genre: "" });
+
   return (
     <QueryClientProvider client={queryClient}>
-      <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <MainLayout />
-        </ThemeProvider>
-      </ColorModeContext.Provider>
-      <ReactQueryDevtools />
+      <QueryContext.Provider value={[query, setQuery]}>
+        <ColorModeContext.Provider value={colorMode}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <MainLayout />
+          </ThemeProvider>
+        </ColorModeContext.Provider>
+        <ReactQueryDevtools />
+      </QueryContext.Provider>
     </QueryClientProvider>
   );
 };

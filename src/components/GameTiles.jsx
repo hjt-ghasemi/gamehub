@@ -1,5 +1,3 @@
-import Container from "@mui/material/Container";
-
 import useGames from "../hooks/useGames";
 import { Grid, Stack } from "@mui/material";
 import GameCard from "./GameCard";
