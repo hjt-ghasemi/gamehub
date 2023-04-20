@@ -24,6 +24,7 @@ const App = () => {
     genres: "",
     parent_platforms: "",
     ordering: "",
+    search: "",
   });
 
   useEffect(() => {

@@ -29,23 +29,24 @@ const iconMap = {
 const PlatformIconsList = ({ platforms, score }) => {
   return (
     <Stack direction="row" mb={2}>
-      {platforms.map(({ platform }) => {
-        const MyIcon = iconMap[platform.slug];
-        return (
-          MyIcon && (
-            <Icon
-              key={platform.name}
-              sx={{
-                color: (theme) =>
-                  theme.palette.mode === "dark" ? grey[500] : grey[600],
-                overflow: "visible",
-              }}
-            >
-              <MyIcon size={15} />
-            </Icon>
-          )
-        );
-      })}
+      {platforms &&
+        platforms.map(({ platform }) => {
+          const MyIcon = iconMap[platform.slug];
+          return (
+            MyIcon && (
+              <Icon
+                key={platform.name}
+                sx={{
+                  color: (theme) =>
+                    theme.palette.mode === "dark" ? grey[500] : grey[600],
+                  overflow: "visible",
+                }}
+              >
+                <MyIcon size={15} />
+              </Icon>
+            )
+          );
+        })}
       <CriticScore score={score} />
     </Stack>
   );

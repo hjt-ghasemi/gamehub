@@ -49,7 +49,9 @@ const PlatformsDropdown = () => {
         loading={isLoading}
         loadingPosition="end"
       >
-        <span>{selectedPlatform(query.parent_platforms) || "platforms"}</span>
+        <span>
+          platform: {selectedPlatform(query.parent_platforms) || "all"}
+        </span>
       </LoadingButton>
       <Menu
         id="platform-menu"
@@ -60,6 +62,9 @@ const PlatformsDropdown = () => {
           "aria-labelledby": "basic-button",
         }}
       >
+        <MenuItem key="all" onClick={() => handleSelect("")}>
+          All
+        </MenuItem>
         {platforms.map((platform) => (
           <MenuItem key={platform.id} onClick={() => handleSelect(platform.id)}>
             {platform.name}

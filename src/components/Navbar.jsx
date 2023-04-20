@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import logo from "../assets/logo.png";
 import DarkModeSwitch from "./DarkModeSwitch";
+import SearchInput from "./SearchInput";
 
 const Navbar = () => {
   return (
@@ -19,7 +20,7 @@ const Navbar = () => {
             }}
           ></Link>
         </Box>
-        <Box sx={{ flex: 1, height: "40px", background: "#ffffff44" }}></Box>
+        <SearchInput />
         <Box>
           <DarkModeSwitch />
         </Box>
