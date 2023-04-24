@@ -1,10 +1,10 @@
+import { useContext, useRef } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import Input from "@mui/material/Input";
 import Stack from "@mui/material/Stack";
 import { BsSearch } from "react-icons/bs";
-import { useContext, useRef } from "react";
-import QueryContext from "../contexts/QueryContext";
 import { cleanState } from "../services/paramsComposer";
+import QueryContext from "../contexts/QueryContext";
 
 const SearchInput = () => {
   const search = useRef(null);
@@ -17,7 +17,7 @@ const SearchInput = () => {
   };
 
   return (
-    <Stack sx={{ flex: 1 }} alignItems="center">
+    <Stack sx={{ flex: 1 }} alignItems="center" px={2}>
       <Input
         sx={{
           maxWidth: "600px",
@@ -25,9 +25,9 @@ const SearchInput = () => {
           borderRadius: 7,
           mx: "auto",
           width: "100%",
-          padding: "5px 10px",
+          padding: "1px 10px",
         }}
-        placeholder="Search game"
+        placeholder="search game"
         startAdornment={
           <InputAdornment position="start">
             <BsSearch />
