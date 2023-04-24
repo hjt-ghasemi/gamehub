@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import { BsSearch } from "react-icons/bs";
 import { cleanState } from "../services/paramsComposer";
 import QueryContext from "../contexts/QueryContext";
+import { useEffect } from "react";
 
 const SearchInput = () => {
   const search = useRef(null);
@@ -15,6 +16,10 @@ const SearchInput = () => {
       setQuery({ ...cleanState, search: search.current.value });
     }
   };
+
+  useEffect(() => {
+    if (query.search === "") search.current.value = "";
+  }, [query]);
 
   return (
     <Stack sx={{ flex: 1 }} alignItems="center" px={2}>
@@ -36,7 +41,6 @@ const SearchInput = () => {
         disableUnderline
         inputRef={search}
         onKeyDown={handleKeyPress}
-        defaultValue={query.search}
       />
     </Stack>
   );

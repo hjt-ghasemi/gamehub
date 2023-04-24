@@ -14,16 +14,17 @@ const GenreCard = ({ genre }) => {
       alignItems="center"
       sx={{
         cursor: "pointer",
-        padding: 1,
-        borderRadius: 1,
+        borderRadius: 2,
         "&:hover , &.active": {
           backgroundColor: "#77777777",
         },
+        padding: "4px 6px",
       }}
       className={genre.slug === query.genres ? "active" : ""}
       onClick={() =>
         setQuery((prevQuery) => ({
           ...prevQuery,
+          search: "",
           genres: genre.slug,
         }))
       }
@@ -33,7 +34,9 @@ const GenreCard = ({ genre }) => {
         src={getCroppedImageUrl(genre.image_background)}
         sx={{ marginRight: "20px" }}
       />
-      <Typography variant="h6">{genre.name}</Typography>
+      <Typography variant="subtitle1" noWrap>
+        {genre.name}
+      </Typography>
     </Stack>
   );
 };
