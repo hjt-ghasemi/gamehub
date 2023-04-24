@@ -1,6 +1,6 @@
 import { useMediaQuery, useTheme } from "@mui/material";
 
-export default function useTileCreator(games) {
+export default function useTileCreator(pages) {
   const theme = useTheme();
 
   const gtMd = useMediaQuery(theme.breakpoints.up("md"));
@@ -16,7 +16,13 @@ export default function useTileCreator(games) {
 
   const tiledGames = [];
 
-  if (!games?.length) return { tiledGames, cols };
+  if (!pages || !pages[0]?.data.results.length) return { tiledGames, cols };
+
+  const games = [];
+
+  pages.forEach((page) => {
+    games.push(...page.data.results);
+  });
 
   for (let i = 0; i < cols; i++) tiledGames[i] = [];
 

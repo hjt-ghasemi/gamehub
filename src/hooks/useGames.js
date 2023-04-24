@@ -1,5 +1,5 @@
 import httpService from "../services/httpService";
-import { useQuery } from "react-query";
+import { useInfiniteQuery, useQuery } from "react-query";
 import useTileCreator from "./useTileCreator";
 import { useContext } from "react";
 import QueryContext from "../contexts/QueryContext";
@@ -8,14 +8,41 @@ import config from "../config.json";
 
 export default function useGames() {
   const [query] = useContext(QueryContext);
-  const { data, error, isLoading, isFetching } = useQuery(
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    status,
+    isFetchingNextPage,
+  } = useInfiniteQuery(
     [config.gamesKey, paramsComposer(query)],
-    () =>
-      httpService.get("/games", {
-        params: paramsComposer(query),
-      })
+    ({ pageParam }) => {
+      if (pageParam) return httpService.get(pageParam.next, { baseURL: "" });
+      return httpService.get("/games", {
+        params: {
+          ...paramsComposer(query),
+        },
+      });
+    },
+    {
+      getNextPageParam: (lastPage, pages) => {
+        if (!lastPage.data.next) return undefined;
+        return { next: lastPage.data.next };
+      },
+    }
   );
+  console.log("data: ", data);
 
-  const { tiledGames, cols } = useTileCreator(data?.data?.results);
-  return { games: tiledGames, error, isLoading, isFetching, cols };
+  const { tiledGames, cols } = useTileCreator(data?.pages);
+
+  return {
+    games: tiledGames,
+    error,
+    status,
+    cols,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  };
 }
