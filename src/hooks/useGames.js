@@ -19,6 +19,13 @@ export default function useGames() {
     [config.gamesKey, paramsComposer(query)],
     ({ pageParam }) => {
       if (pageParam) return httpService.get(pageParam.next, { baseURL: "" });
+
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+
       return httpService.get("/games", {
         params: {
           ...paramsComposer(query),

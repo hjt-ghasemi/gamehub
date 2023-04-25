@@ -22,7 +22,7 @@ const GameTiles = () => {
       window.innerHeight;
 
     if (shouldFetch) fetchNextPage();
-  }, []);
+  }, [fetchNextPage]);
 
   useEffect(() => {
     window.addEventListener("scroll", windowEvent);

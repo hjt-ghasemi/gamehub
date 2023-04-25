@@ -10,14 +10,14 @@ const CriteriaChips = () => {
       ...prevQuery,
       genres: "",
     }));
-  }, []);
+  }, [setQuery]);
 
   const handleClearSearch = useCallback(() => {
     setQuery((prevQuery) => ({
       ...prevQuery,
       search: "",
     }));
-  }, []);
+  }, [setQuery]);
 
   return (
     <Box sx={{ flex: "100%" }}>
