@@ -1,9 +1,9 @@
+import { useEffect, useCallback } from "react";
+import { Grid, Stack } from "@mui/material";
+import LoadingMore from "./LoadingMore";
 import useGames from "../hooks/useGames";
-import { Button, Grid, Stack, Typography } from "@mui/material";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
-import { useEffect } from "react";
-import { useCallback } from "react";
 
 const GameTiles = () => {
   const {
@@ -61,16 +61,7 @@ const GameTiles = () => {
           );
         })}
       <Grid item xs={12}>
-        {hasNextPage && (
-          <Typography
-            variant="caption"
-            display="block"
-            gutterBottom
-            sx={{ textAlign: "center" }}
-          >
-            {isFetchingNextPage ? "loading..." : "load more"}
-          </Typography>
-        )}
+        {hasNextPage && <LoadingMore isLoading={isFetchingNextPage} />}
       </Grid>
     </Grid>
   );

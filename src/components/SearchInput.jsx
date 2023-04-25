@@ -1,11 +1,10 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useEffect } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import Input from "@mui/material/Input";
 import Stack from "@mui/material/Stack";
 import { BsSearch } from "react-icons/bs";
 import { cleanState } from "../services/paramsComposer";
 import QueryContext from "../contexts/QueryContext";
-import { useEffect } from "react";
 
 const SearchInput = () => {
   const search = useRef(null);

@@ -1,9 +1,9 @@
-import httpService from "../services/httpService";
-import { useInfiniteQuery, useQuery } from "react-query";
-import useTileCreator from "./useTileCreator";
 import { useContext } from "react";
+import { useInfiniteQuery } from "react-query";
+import useTileCreator from "./useTileCreator";
 import QueryContext from "../contexts/QueryContext";
 import paramsComposer from "../services/paramsComposer";
+import httpService from "../services/httpService";
 import config from "../config.json";
 
 export default function useGames() {

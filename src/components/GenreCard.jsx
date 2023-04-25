@@ -1,8 +1,8 @@
+import { useContext } from "react";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import getCroppedImageUrl from "../services/imageUrlService";
-import { useContext } from "react";
 import QueryContext from "../contexts/QueryContext";
 
 const GenreCard = ({ genre }) => {
