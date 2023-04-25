@@ -6,7 +6,7 @@ export default function useGenres() {
     httpService.get("/genres")
   );
 
-  const genres = data?.data?.results;
+  const genres = data?.data?.results || [];
 
   return { genres, error, isLoading };
 }

@@ -45,7 +45,7 @@ const GenresSection = () => {
       }}
       ref={section}
     >
-      <Title sx={{ paddingBottom: 2 }}>Genres</Title>
+      <Title sx={{ marginBottom: 2 }}>Genres</Title>
       {loadingContent ||
         genres.map((genre) => <GenreCard key={genre.id} genre={genre} />)}
     </Stack>

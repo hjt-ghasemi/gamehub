@@ -50,7 +50,6 @@ const GameTiles = () => {
     <Grid container spacing={4}>
       {loadingResponse ||
         games.map((gamesCol, idx) => {
-          console.log(gamesCol);
           return (
             <Grid item xs={12 / cols} key={idx}>
               <Stack spacing={4}>

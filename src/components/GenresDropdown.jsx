@@ -1,29 +1,20 @@
 import { useContext, useState } from "react";
-import Button from "@mui/material/Button";
+import { useMediaQuery } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
+import LoadingButton from "@mui/lab/LoadingButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import QueryContext from "../contexts/QueryContext";
+import useGenres from "../hooks/useGenres";
 
-const OrderDropdown = () => {
-  const orders = [
-    { label: "Relenvance", slug: "" },
-    { label: "Name", slug: "name" },
-    { label: "Release date", slug: "released" },
-    { label: "Critic", slug: "-metacritic" },
-  ];
-
-  const selectedOrder = (slug) => {
-    const index = orders.findIndex((order) => order.slug === slug);
-    return orders[index].label;
-  };
-
+const GenresDropdown = () => {
+  const { genres, error, isLoading } = useGenres();
   const [query, setQuery] = useContext(QueryContext);
+  const matches = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -31,39 +22,52 @@ const OrderDropdown = () => {
     setAnchorEl(null);
   };
 
-  const handleSelect = (sortBy) => {
+  const handleSelect = (genre) => {
     setAnchorEl(null);
     setQuery((prevQuery) => ({
       ...prevQuery,
       search: "",
-      ordering: sortBy,
+      genres: genre,
     }));
+  };
+
+  if (error || !matches) return null;
+
+  const selectedGenre = (slug) => {
+    if (!genres) return null;
+    const index = genres.findIndex((genre) => slug === genre.slug);
+    return genres[index]?.name;
   };
 
   return (
     <Box>
-      <Button
-        id="sort-button"
+      <LoadingButton
+        id="genre-button"
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
+        loading={isLoading}
+        loadingPosition="end"
       >
-        Order by: {selectedOrder(query.ordering)}
-      </Button>
+        <span>genres: {selectedGenre(query.genres) || "all"}</span>
+      </LoadingButton>
       <Menu
-        id="sort-menu"
+        id="genre-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          "aria-labelledby": "sort-button",
+          "aria-labelledby": "basic-button",
         }}
       >
-        {orders.map((order) => (
-          <MenuItem key={order.slug} onClick={() => handleSelect(order.slug)}>
-            {order.label}
+        <MenuItem key="all" onClick={() => handleSelect("")}>
+          All
+        </MenuItem>
+        {genres.map((genres) => (
+          <MenuItem key={genres.id} onClick={() => handleSelect(genres.slug)}>
+            {genres.name}
           </MenuItem>
         ))}
       </Menu>
@@ -71,4 +75,4 @@ const OrderDropdown = () => {
   );
 };
 
-export default OrderDropdown;
+export default GenresDropdown;

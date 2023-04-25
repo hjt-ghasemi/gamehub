@@ -1,11 +1,10 @@
-import Button from "@mui/material/Button";
+import { useContext, useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { useContext, useState } from "react";
-import usePlatforms from "../hooks/usePlatforms";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import usePlatforms from "../hooks/usePlatforms";
 import QueryContext from "../contexts/QueryContext";
 
 const PlatformsDropdown = () => {
@@ -25,6 +24,7 @@ const PlatformsDropdown = () => {
     setAnchorEl(null);
     setQuery((prevQuery) => ({
       ...prevQuery,
+      search: "",
       parent_platforms: id,
     }));
   };

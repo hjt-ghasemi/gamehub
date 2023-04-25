@@ -32,7 +32,6 @@ export default function useGames() {
       },
     }
   );
-  console.log("data: ", data);
 
   const { tiledGames, cols } = useTileCreator(data?.pages);
 
